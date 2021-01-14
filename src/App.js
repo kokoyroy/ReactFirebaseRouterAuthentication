@@ -4,6 +4,9 @@ import SignIn from './components/auth/SignIn'
 import { Dashboard } from './components/dashboard/Dashboard'
 import Navbar from './components/layout/Navbar'
 import ProjectDetails from './components/project/ProjectDetails'
+import SignUp from './components/auth/SignUp'
+
+
 export default class App extends Component {
   render() {
     return (
@@ -14,6 +17,7 @@ export default class App extends Component {
           <Switch>
             <Route path='/project/:id' component={ProjectDetails} />
             <Route path='/signin' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
             <Route exact path='/' component={Dashboard} />
           </Switch>
         </div>

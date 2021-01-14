@@ -15,7 +15,7 @@ function Navbar() {
                     <Link to="/" className="brand-logo left">Logo</Link>
                     
                     {/* button for the sidebar! */}
-                    <Link to='' data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></Link>
+                    <Link to='#' data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></Link>
                     
                     
                     {/* links for the full view */}
