@@ -1,0 +1,65 @@
+import React, { Component } from 'react'
+
+class CreateProject extends Component {
+    state = {
+        title: '',
+        content: '',
+        disabled: true
+    }
+    handleChange = (e) => {
+        //button disabling
+        if (this.state.title && this.state.content) {
+            this.setState({
+                disabled: false
+            })
+            //button enabling
+        } else this.setState({ disabled: true })
+
+        //seting the state of title & content
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
+    //submit handler
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
+    }
+
+
+    //Render method
+    render() {
+        return (
+            <div className='container'>
+                <form onSubmit={this.handleSubmit} className="white">
+                    <h5 className="grey-text text-darken-3">Create a new project</h5>
+                    <div className='row'>
+                        <div className='col l6 m12 s12'>
+                            <div className="input-field">
+                                <label htmlFor="title">Email</label>
+                                <input type="text" id="title" value={this.state.title} onChange={this.handleChange} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='row'>
+                        <div className='col m12 l6 s12'>
+                            <div className="input-field">
+                                <label htmlFor="content">Content</label>
+                                <textarea value={this.state.content} className="materialize-textarea" id="content" onChange={this.handleChange} ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="input-field">
+                        <button disabled={this.state.disabled} className="btn pink lighten-1 z-depth-0" id='btn' >Create Project</button>
+                    </div>
+                </form>
+
+
+            </div>
+        )
+    }
+}
+
+export default CreateProject

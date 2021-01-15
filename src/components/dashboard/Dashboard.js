@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ProjectList from '../project/ProjectList'
-// import { connect } from 'react-redux'
 import Notifications from './Notifications'
 
 
@@ -19,13 +18,5 @@ export class Dashboard extends Component {
     }
 }
 
-// const mapStateToProps = (state) => ({
 
-// })
-
-// const mapDispatchToProps = dispatch => (
-//     {}
-// )
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 export default Dashboard 
