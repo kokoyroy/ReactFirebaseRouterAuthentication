@@ -6,11 +6,10 @@ import Notifications from './Notifications'
 
 
 
-export class Dashboard extends Component {
+class Dashboard extends Component {
     render() {
-        // gkio giati re malaka den douleuei to redux? sto line 13 prpei na diksei sto console to projects alla den... ti kano lathos re mlk?
         console.log('log the props');
-        console.log(this.props);
+        console.log(this.props.projects);
         return (
             <div className='dashboard container'>
                 <div className="row">
@@ -22,9 +21,9 @@ export class Dashboard extends Component {
     }
 }
 
-const mapStateToProps = state =>{
-    return{
-        projects : state.proj.projects
+const mapStateToProps = state => {
+    return {
+        projects: state.proj.projects
     }
 }
 
