@@ -6,6 +6,6 @@ import projectReducer from './projectReducer';
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    project: projectReducer
+    proj: projectReducer
 })
 export default rootReducer

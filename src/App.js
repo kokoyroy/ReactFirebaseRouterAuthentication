@@ -12,6 +12,7 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <div className="App">
           <Navbar />
           {/* Routes inside the switch tag */}
           <Switch>
@@ -21,6 +22,7 @@ export default class App extends Component {
             <Route path='/signup' component={SignUp} />
             <Route exact path='/' component={Dashboard} />
           </Switch>
+        </div>
       </BrowserRouter>
     )
   }
