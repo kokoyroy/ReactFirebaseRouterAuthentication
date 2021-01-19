@@ -13,7 +13,7 @@ class Dashboard extends Component {
         projects: []
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.projects.length !== this.props.projects.length) {
+        if (prevProps.projects !== this.props.projects) {
             let projects = []
             firestoreProject.collection('projects')
                 .onSnapshot((snap) => {
@@ -23,11 +23,11 @@ class Dashboard extends Component {
                         projects.push({ ...doc.data(), id: doc.id })
                     })
                     this.props.state(projects);
-                    this.setState({ projects })
+                    this.setState(() => { projects })
                 }, (err) => {
                     console.log(err);
                 }, () => {
-
+                    console.log('epityxia!');
                 })
 
         }
@@ -44,7 +44,7 @@ class Dashboard extends Component {
                     projects.push({ ...doc.data(), id: doc.id })
                 })
                 console.log('kouokoy!');
-                this.setState({ projects })
+                this.setState(() => { projects })
                 console.log('tza!');
                 this.props.state(projects);
                 console.log(this.props);
