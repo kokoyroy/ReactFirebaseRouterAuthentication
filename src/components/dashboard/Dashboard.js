@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { firestoreProject } from '../../config/firebaseConfig'
 // import { stateInitialiser } from '../../store/reducers/projectReducer'
@@ -8,31 +8,42 @@ import Notifications from './Notifications'
 
 
 
-class Dashboard extends Component {
+class Dashboard extends PureComponent {
     state = {
         projects: []
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.projects !== this.props.projects) {
-            let projects = []
-            firestoreProject.collection('projects')
-                .onSnapshot((snap) => {
-                    snap.forEach((doc) => {
-                        // console.log('snap doc');
-                        // console.log(doc.data());
-                        projects.push({ ...doc.data(), id: doc.id })
-                    })
-                    this.props.state(projects);
-                    this.setState(() => { projects })
-                }, (err) => {
-                    console.log(err);
-                }, () => {
-                    console.log('epityxia!');
-                })
 
-        }
+    // shouldComponentUpdate(){
+    //     if(this.state.projects === this.props.projects){
+    //         return false
+    //     }else{
+    //         return true
+    //     }
+    // }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (this.state !== prevState) {
+    //         let projects = []
+    //         console.log('COMPONTNET DIDUPDATE!');
+    //         firestoreProject.collection('projects')
+    //             .onSnapshot((snap) => {
+    //                 snap.forEach((doc) => {
+    //                     // console.log('snap doc');
+    //                     // console.log(doc.data());
+    //                     projects.push({ ...doc.data(), id: doc.id })
+    //                 })
+    //                 this.props.state(projects);
+    //                 this.setState((state, props) => ({
+    //                     projects: projects
+    //                 }));
+    //             }, (err) => {
+    //                 console.log(err);
+    //             }, () => {
+    //                 console.log('epityxia!');
+    //             })
 
-    }
+    //     }
+
+    // }
 
     componentDidMount() {
         let projects = []
@@ -44,7 +55,9 @@ class Dashboard extends Component {
                     projects.push({ ...doc.data(), id: doc.id })
                 })
                 console.log('kouokoy!');
-                this.setState(() => { projects })
+                this.setState((state, props) => ({
+                    projects: projects
+                }));
                 console.log('tza!');
                 this.props.state(projects);
                 console.log(this.props);
