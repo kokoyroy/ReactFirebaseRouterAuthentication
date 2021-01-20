@@ -10,82 +10,51 @@ import Notifications from './Notifications'
 
 class Dashboard extends PureComponent {
     state = {
-        projects: []
+        projects: ''
     }
 
-    // shouldComponentUpdate(){
-    //     if(this.state.projects === this.props.projects){
-    //         return false
-    //     }else{
-    //         return true
-    //     }
-    // }
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (this.state !== prevState) {
-    //         let projects = []
-    //         console.log('COMPONTNET DIDUPDATE!');
-    //         firestoreProject.collection('projects')
-    //             .onSnapshot((snap) => {
-    //                 snap.forEach((doc) => {
-    //                     // console.log('snap doc');
-    //                     // console.log(doc.data());
-    //                     projects.push({ ...doc.data(), id: doc.id })
-    //                 })
-    //                 this.props.state(projects);
-    //                 this.setState((state, props) => ({
-    //                     projects: projects
-    //                 }));
-    //             }, (err) => {
-    //                 console.log(err);
-    //             }, () => {
-    //                 console.log('epityxia!');
-    //             })
 
-    //     }
-
-    // }
 
     componentDidMount() {
-        let projects = []
+
         firestoreProject.collection('projects')
             .onSnapshot((snap) => {
+                let projects = []
                 snap.forEach((doc) => {
-                    // console.log('snap doc');
-                    // console.log(doc.data());
                     projects.push({ ...doc.data(), id: doc.id })
                 })
-                console.log('kouokoy!');
-                this.setState((state, props) => ({
-                    projects: projects
+                console.log('component did mount!!');
+                //initialise the store
+                this.props.storeReresh()
+                this.props.initialiseState(projects);
+                //initialise the state from store
+                this.setState(() => ({
+                    projects: this.props.projects
                 }));
-                console.log('tza!');
-                this.props.state(projects);
-                console.log(this.props);
             }, (err) => {
+                console.log('there was a problem in firebase as it was initialising the store...');
                 console.log(err);
             }, () => {
-                console.log('epityxia!');
             })
-
     }
-    // componentWillUnmount() {
-    //     console.log('Dashboard component unmounts');
-    //     this.state.unmount();
-    // }
+
 
 
 
     render() {
-        console.log('log the State');
-        console.log(this.state.projects);
-        console.log('log the props');
-        console.log(this.props.projects);
-        console.log(this.state.projects === this.props.projects);
+        if (this.state.projects) {
+            console.log('to state einai tora')
+            console.log(this.state.projects)
+            console.log('to redux einia')
+            console.log(this.props.projects)
+        }
+
+
         return (
             <div className='dashboard container'>
                 <div className="row">
-                    <div className="col s12 m6"><ProjectList /></div>
-                    <div className="col s12 m5 offset-m1"><Notifications /></div>
+                    {this.state.projects && <div className="col s12 m6"><ProjectList /></div>}
+                    {this.state.projects && <div className="col s12 m5 offset-m1"><Notifications /></div>}
                 </div>
             </div>
         )
@@ -100,7 +69,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        state: (projects) => dispatch({ type: 'STATE_INIT', projects })
+        initialiseState: (projects) => dispatch({ type: 'STATE_INIT', projects }),
+        storeReresh: () => dispatch({ type: 'REFRESH' })
+
     }
 }
 
