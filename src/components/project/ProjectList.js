@@ -1,13 +1,26 @@
 import React from 'react'
+import ProjectsHook from '../../Hooks/ProjectsHook'
 import ProjectSummary from './ProjectSummary'
 
 function ProjectList() {
+    const projects = ProjectsHook('projects')
+
+
+
     return (
         <>
-            <ProjectSummary/>
-            <ProjectSummary/>
-            <ProjectSummary/>
-            
+            { projects && projects.map(proj => (
+                <ProjectSummary
+                    key={proj.id}
+                    title={proj.title}
+                    content={proj.content}
+                    authonFirstname={proj.authorFirstname}
+                    authorLastname={proj.authorLastname}
+                    authorID={proj.authorId}
+                />
+            ))}
+
+
         </>
     )
 }
