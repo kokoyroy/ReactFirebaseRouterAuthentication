@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
 
     render() {
-
+        if (this.props.user.email) { console.log(this.props.user) }
 
 
         return (
@@ -32,7 +32,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
     return {
-        projects: state.proj.projects
+        projects: state.proj.projects,
+        user: state.auth.user
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { auth } from '../../config/firebaseConfig'
 class SignUp extends Component {
     state = {
         email: '',
@@ -26,7 +26,9 @@ class SignUp extends Component {
     //submit handler
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then(res => console.log(res)).catch(err=>console.log(err.message))
     }
 
 

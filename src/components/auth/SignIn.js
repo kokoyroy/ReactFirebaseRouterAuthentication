@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { auth } from '../../config/firebaseConfig';
+
+
 
 class SignIn extends Component {
     state = {
@@ -24,7 +28,22 @@ class SignIn extends Component {
     //submit handler
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        const promise = auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then((data) => {
+                console.log(data.user.uid);
+                const user = {
+                    email: this.state.email,
+                    uID: data.user.uid,
+                    isLoggedIn: true
+                }
+                //dispatch user to store
+                this.props.userLogin(user)
+            })
+        promise.catch((e) => {
+            console.log(e.message);
+        })
+        this.props.history.push('/')    
     }
 
 
@@ -61,5 +80,11 @@ class SignIn extends Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch) => ({
+    userLogin: (user) => dispatch({ type: 'LOGIN', user })
+})
 
-export default SignIn
+
+
+export default connect(null, mapDispatchToProps)(SignIn)
+// export default SignIn

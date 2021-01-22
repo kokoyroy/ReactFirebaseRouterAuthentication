@@ -8,7 +8,7 @@ import SignUp from './components/auth/SignUp'
 import CreateProject from './components/project/CreateProject'
 
 
-export default class App extends Component {
+ class App extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -27,3 +27,6 @@ export default class App extends Component {
     )
   }
 }
+
+
+export default App;

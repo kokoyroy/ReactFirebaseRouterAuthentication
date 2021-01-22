@@ -14,7 +14,7 @@ function ProjectList() {
                     key={proj.id}
                     title={proj.title}
                     content={proj.content}
-                    authonFirstname={proj.authorFirstname}
+                    authorFirstname={proj.authorFirstname}
                     authorLastname={proj.authorLastname}
                     authorID={proj.authorId}
                 />
